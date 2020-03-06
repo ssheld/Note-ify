@@ -11,11 +11,11 @@ const removeNote = function(title) {
     const filteredNotes = notes.filter(note => {
         return note.title.toLowerCase() !== title.toLowerCase()
     })
-    saveNotes(filteredNotes);
 
     if (notes.length === filteredNotes.length) {
         console.log(chalk.bgRed('No note found!'));
     } else {
+        saveNotes(filteredNotes);
         console.log(chalk.bgGreen('Note removed!'));
     }
 }
@@ -32,9 +32,9 @@ const addNote = function (title, body) {
             body: body
         })
         saveNotes(notes)
-        console.log('New note added!')
+        console.log(chalk.bgGreen('New note added!'))
     } else {
-        console.log('Note title taken!')
+        console.log(chalk.bgRed('Note title taken!'))
     }
 }
 
