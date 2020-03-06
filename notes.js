@@ -10,11 +10,7 @@ const removeNote = function(title) {
     const filteredNotes = notes.filter(note => {
         return note.title.toLowerCase() !== title.toLowerCase()
     })
-
     saveNotes(filteredNotes);
-
-    console.log('\n filtered notes are \n');
-    console.log(JSON.stringify(filteredNotes) + '\n');
 }
 
 const addNote = function (title, body) {
