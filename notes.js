@@ -7,20 +7,19 @@ const getNotes = function () {
 const removeNote = function(title) {
     const notes = loadNotes();
 
-    const index = notes.findIndex(note => note.title.toLowerCase() === title.toLowerCase());
+    const filteredNotes = notes.filter(note => {
+        return note.title.toLowerCase() !== title.toLowerCase()
+    })
 
-    if (index === -1) {
-        console.log('Could not find the title you specified.');
-    } else {
-        console.log('Removing note: ' + JSON.stringify(notes[index]));
-        notes.splice(index, 1);
-        saveNotes(notes);
-    }
+    saveNotes(filteredNotes);
+
+    console.log('\n filtered notes are \n');
+    console.log(JSON.stringify(filteredNotes) + '\n');
 }
 
 const addNote = function (title, body) {
     const notes = loadNotes()
-    const duplicateNotes = notes.filter(function (note) {
+    const duplicateNotes = notes.filter(note => {
         return note.title === title
     })
 
