@@ -15,6 +15,19 @@ const listNotes = () => {
     });
 }
 
+const readNote = (title) => {
+    const notes = loadNotes();
+
+    const note = notes.find(note => note.title.toLowerCase() === title.toLowerCase());
+
+    if (note) {
+        console.log(chalk.bold.blue(note.title))
+        console.log(chalk.bold.green(note.body));
+    } else {
+        console.log(chalk.red.bold('Error: No note found.'));
+    }
+}
+
 const removeNote = (title) => {
     const notes = loadNotes();
 
@@ -30,7 +43,7 @@ const removeNote = (title) => {
 
 const addNote = (title, body) => {
     const notes = loadNotes()
-    const duplicateNote = notes.find(note => note.title === title);
+    const duplicateNote = notes.find(note => note.title.toLowerCase() === title.toLowerCase());
 
     if (!duplicateNote) {
         notes.push({
@@ -62,6 +75,7 @@ const loadNotes = () => {
 
 module.exports = {
     getNotes: getNotes,
+    readNote: readNote,
     addNote: addNote,
     listNotes: listNotes,
     removeNote: removeNote
