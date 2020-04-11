@@ -1,0 +1,25 @@
+extends layout
+
+block content
+  header
+    .container.text-center
+        h1.display-2 Note-ify
+    .container.w-50.bg-light.p-2.border.border-dark.rounded
+      h3.display-6 Update this note
+      form(action='/notes/update_note/'+note._id, method='post')
+        .form-group
+          .col-xs-1
+            label(for='noteAuthor') Author:
+            input#noteAuthor.form-control(type='text' value=note.author name='author')
+        .form-group
+          label(for='noteTitle') Title:
+          input#noteTitle.form-control(type='text' value=note.title name='title')
+        .form-group
+          label(for='noteComment') Comment:
+          textarea#noteComment.form-control(rows='5' name='comment') #{note.comment}
+        button.btn.btn-primary(type='submit') Update note
+    .container.text-center.mt-2.w-25.bg-light.border.border-dark.rounded
+      form(action='/', method='get')
+        small Want to return home?
+        button.btn.btn-primary.m-2(type='submit') Return home
+    // Bootstrap

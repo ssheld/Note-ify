@@ -1,70 +1,29 @@
-const chalk = require('chalk')
-const yargs = require('yargs')
-const notes = require('./notes.js')
+const express = require('express');
+const path = require('path');
+const bodyParser = require('body-parser');
+require('./config/db');
 
-// Customize yargs version
-yargs.version('1.1.0')
+var indexRouter = require('./routes/index');
+var notesRouter = require('./routes/notes')
 
-// Create add command
-yargs.command({
-    command: 'add',
-    describe: 'Add a new note',
-    builder: {
-        title: {
-            describe: 'Note title',
-            demandOption: true,
-            type: 'string'
-        },
-        body: {
-            describe: 'Note body',
-            demandOption: true,
-            type: 'string'
-        }
-    },
-    handler(argv) {
-        notes.addNote(argv.title, argv.body)
-    }
-})
+var app = express();
 
-// Create remove command
-yargs.command({
-    command: 'remove',
-    describe: 'Remove a note',
-    builder: {
-        title: {
-            describe: 'Note title',
-            demandOption: true,
-            type: 'string'
-        }
-    },
-    handler(argv) {
-        notes.removeNote(argv.title);
-    }
-})
+// view engine setup
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'pug');
 
-// Create list command
-yargs.command({
-    command: 'list',
-    describe: 'List your notes',
-    handler() {
-        notes.listNotes();
-    }
-})
+app.use(express.static(path.join(__dirname, 'public')));
+app.use(bodyParser.urlencoded({extended: false}));
 
-// Create read command
-yargs.command({
-    command: 'read',
-    describe: 'Read a note',
-    builder: {
-        title: {
-            describe: 'Note title',
-            demandOption: true,
-            type: 'string'
-        }
-    },
-    handler(argv) {
-        notes.readNote(argv.title);
-    }
-})
+app.use('/', indexRouter);
+app.use('/notes', notesRouter)
 
-yargs.parse()
+// Throw a 404 error if page does not exist
+app.get('*', (req, res) => {
+  res.render('404', {
+    title: 'To-Do List App',
+    error_message: '404 Page Not Found.'
+  });
+});
+
+module.exports = app;

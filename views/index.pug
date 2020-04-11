@@ -1,0 +1,43 @@
+extends layout
+
+block content
+  header
+    .container.text-center
+      h1.display-2 Note-ify
+  .container.w-50.bg-light.p-2.border.border-dark.rounded
+    h3.display-6 Create a new note
+    form(action='/notes/create_note', method='post')
+      .form-group
+        label(for='noteAuthor') Your name
+        input#noteAuthor.form-control(type='text' name='author')
+      .form-group
+        label(for='noteTitle') Note title
+        input#noteTitle.form-control(type='text' name='title')
+      .form-group
+        label(for='noteComment') Comment:
+        textarea#noteComment.form-control(rows='5' name='comment')
+      button.btn.btn-primary(type='submit') Create note
+  .container.text-center.mt-2.w-25.bg-light.border.border-dark.rounded
+    form(action='/notes', method='get')
+      small Want to see your current notes?
+      button.btn.btn-primary.m-2(type='submit') View your current notes
+  if (notes)
+    .container.w-50.bg-light.mt-4.p-2.mb-5.border.border-dark.rounded
+      each note in notes
+        .note.pt-3.pl-3.pr-3.pb-1.bg-light
+          div
+            h2 Title: #{note.title}
+          div
+            h5 Author: #{note.author}
+          div
+            h6 Created on: #{note.createdAt}
+          div
+            p #{note.comment}
+        .row.m-1.pb-2.modify-menu
+          form(action='/notes/'+note._id, method='get')
+            // formid will go here in pug
+            button.btn.btn-primary(type='submit') Modify note
+          form.pl-2(action='/notes/'+note._id, method='post')
+            // formid will go here in pug
+            button.btn.btn-primary(type='submit') Delete note
+        hr.style-one

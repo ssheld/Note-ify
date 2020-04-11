@@ -1,2 +1,3 @@
-# Notify
-A simple node.js command line app to add/remove/read notes to a text file. Purpose: To play around with fs module and command line args.
+This app allows the user to create, update, display and delete notes. You can create a note on the home page and then view all notes by clicking the "view your current notes" button. You can delete a note by clicking the delete button listed with each note when viewing the note list.
+
+To modify a note first view all current notes then click the "modify notes" button of the note you wish to update. This will redirect you to a new page in which you can change the note and update it.
