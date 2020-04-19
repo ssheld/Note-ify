@@ -33,7 +33,10 @@ module.exports = {
     async findNote({params}, res, next) {
         try {
             const note = await noteService.find(params.noteid);
-            res.render('update', {note: note});
+            res.render('update', {
+                title: 'Note-ify',
+                note: note
+            });
 
         } catch(e) {
             console.log(e.message);
@@ -67,4 +70,4 @@ module.exports = {
             res.redirect('/')
         }
     }
-}
+};
