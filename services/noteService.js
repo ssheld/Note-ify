@@ -1,6 +1,5 @@
 const Note = require('../models/noteModel');
 
-
 class NoteService {
 
     static create(obj) {
@@ -17,7 +16,7 @@ class NoteService {
         });
     }
 
-    static read(id) {
+    static find(id) {
         return Note.findById(id)
         .then(note => {
             return note;
@@ -39,4 +38,4 @@ class NoteService {
     }
 }
 
-module.exports.NoteService = NoteService;
+module.exports = NoteService;

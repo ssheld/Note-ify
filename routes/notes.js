@@ -1,39 +1,14 @@
 const express = require('express');
 const router = express.Router();
 const Note = require('../models/noteModel');
+const noteController = require('../controllers/noteController');
 
-// Route to get all notes
-router.get('/', (req, res, next) => {
-    Note.find({})
-      .then((note) => {
-          res.render('index', {
-              notes: note
-          });
-      });
-});
+// Route to find all notes
+router.get('/', noteController.findAllNotes);
+
 
 // Route to save a new note
-router.post('/create_note', ({body}, res, next) => {
-
-    const noteData = {
-        author: body.author,
-        title: body.title,
-        comment: body.comment
-    };
-
-    var note = new Note(noteData);
-
-    note.save()
-      .then(() => {
-          res.redirect('/')
-      })
-      .catch((err) => {
-          if (err) {
-              console.log(err);
-              throw new Error('NoteSaveError', note);
-          }
-      });
-});
+router.post('/', noteController.createNote);
 
 // Route to update note page
 router.get('/:noteid', (req, res, next) => {

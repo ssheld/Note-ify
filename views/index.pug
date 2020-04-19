@@ -6,7 +6,7 @@ block content
       h1.display-2 Note-ify
   .container.w-50.bg-light.p-2.border.border-dark.rounded
     h3.display-6 Create a new note
-    form(action='/notes/create_note', method='post')
+    form(action='/notes', method='post')
       .form-group
         label(for='noteAuthor') Your name
         input#noteAuthor.form-control(type='text' name='author')
