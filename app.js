@@ -19,10 +19,9 @@ app.use('/', indexRouter);
 app.use('/notes', notesRouter)
 
 // Throw a 404 error if page does not exist
-app.get('*', (req, res) => {
+app.use('*', (req, res) => {
   res.render('404', {
-    title: 'To-Do List App',
-    error_message: '404 Page Not Found.'
+    title: 'Note-ify app',
   });
 });
 
