@@ -10,7 +10,7 @@ module.exports = {
             });
         } catch(e) {
             console.log(e.message);
-            res.sendStatus(500) && next(error);
+            res.redirect('/');
         }
     },
     
@@ -26,8 +26,45 @@ module.exports = {
             res.redirect('/');
         } catch(e) {
             console.log(e.message);
-            res.sendStatus(500) && next(error);
+            res.redirect('/');
+        }
+    },
+
+    async findNote({params}, res, next) {
+        try {
+            const note = await noteService.find(params.noteid);
+            res.render('update', {note: note});
+
+        } catch(e) {
+            console.log(e.message);
+            res.redirect('/');
+        }
+    },
+
+    async deleteNote({params}, res, next) {
+        try {
+            await noteService.delete(params.noteid);
+            res.redirect('/');
+        } catch(e) {
+            console.log(e.message);
+            res.redirect('/')
+        }
+    },
+
+    async updateNote(req, res, next) {
+        const data = {
+            author: req.body.author,
+            title: req.body.title,
+            comment: req.body.comment
+        }
+
+        try {
+            await noteService.update(req.params.noteid, data);
+            res.redirect('/');
+
+        } catch(e) {
+            console.log(e.message);
+            res.redirect('/')
         }
     }
-
 }

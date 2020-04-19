@@ -9,13 +9,13 @@ block content
     form(action='/notes', method='post')
       .form-group
         label(for='noteAuthor') Your name
-        input#noteAuthor.form-control(type='text' name='author')
+        input#noteAuthor.form-control(type='text' name='author' required)
       .form-group
         label(for='noteTitle') Note title
-        input#noteTitle.form-control(type='text' name='title')
+        input#noteTitle.form-control(type='text' name='title' required)
       .form-group
         label(for='noteComment') Comment:
-        textarea#noteComment.form-control(rows='5' name='comment')
+        textarea#noteComment.form-control(rows='5' name='comment' required)
       button.btn.btn-primary(type='submit') Create note
   .container.text-center.mt-2.w-25.bg-light.border.border-dark.rounded
     form(action='/notes', method='get')
