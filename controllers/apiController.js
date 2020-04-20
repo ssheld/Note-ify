@@ -9,7 +9,7 @@ module.exports = {
             // Used in response to preflight request.
             'Access-Control-Allow-Methods':'GET,PUT,POST,DELETE,OPTIONS',
             // Specifies list of acceptable headers
-            "Access-Control-Allow-Headers": "Content-Type, Access-Control-Allow-Headers",
+            "Access-Control-Allow-Headers": "Content-Type",
             // Set content-type for all api requests
             'Content-type':'application/json'
         });
@@ -23,7 +23,7 @@ module.exports = {
         try {
             const notes = await noteService.list();
             res.status(200);
-            res.send(JSON.stringify(notes));
+            res.json(notes);
         } catch(e) {
             console.log(e.message);
             res.status(404).end();
@@ -50,7 +50,7 @@ module.exports = {
         try {
             const note = await noteService.find(params.noteid);
             res.status(200);
-            res.send(JSON.stringify(note));
+            res.json(note);
         } catch(e) {
             console.log(e.message);
             res.status(404).end();
