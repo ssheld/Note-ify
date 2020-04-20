@@ -9,9 +9,7 @@ module.exports = {
             // Used in response to preflight request.
             'Access-Control-Allow-Methods':'GET,PUT,POST,DELETE,OPTIONS',
             // Specifies list of acceptable headers
-            "Access-Control-Allow-Headers": "Content-Type",
-            // Set content-type for all api requests
-            'Content-type':'application/json'
+            "Access-Control-Allow-Headers": "Content-Type"
         });
         if (req.method == 'OPTIONS'){
             return res.status(200).end();
