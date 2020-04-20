@@ -36,8 +36,9 @@ module.exports = {
         };
 
         try {
-            await noteService.create(noteData);
-            res.status(201).end();
+            const savedNote = await noteService.create(noteData);
+            res.status(201);
+            res.json(savedNote);
         } catch(e) {
             console.log(e.message);
             res.status(500).end();
@@ -57,8 +58,9 @@ module.exports = {
 
     async deleteNote({params}, res, next) {
         try {
-            await noteService.delete(params.noteid);
-            res.status(200).end();
+            const deletedNote = await noteService.delete(params.noteid);
+            res.status(200);
+            res.json(deletedNote);
         } catch(e) {
             console.log(e.message);
             res.status(404).end();
@@ -73,8 +75,9 @@ module.exports = {
         }
 
         try {
-            await noteService.update(req.params.noteid, data);
-            res.status(200).end();
+            const updatedNote = await noteService.update(req.params.noteid, data);
+            res.status(200);
+            res.json(updatedNote);
         } catch(e) {
             console.log(e.message);
             res.status(404).end();
