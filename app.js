@@ -13,15 +13,16 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
-app.use(express.static(path.join(__dirname, 'public')));
-
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
+
+app.use(express.static(path.join(__dirname, 'public')));
 
 // Set up routes
 app.use('/', indexRouter);
 app.use('/notes', notesRouter)
 app.use('/api/notes', apiRouter);
+app.use('/test', express.static(path.join(__dirname, 'public/test')));
 
 // Throw a 404 error if page does not exist
 app.use('*', (req, res) => {
