@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 require('../models/noteModel');
 require('dotenv').config();
 
-var dbURL =`mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PW}@cluster0-7zngf.mongodb.net/test?retryWrites=true&w=majority`;
+var dbURL =`mongodb+srv://${process.env.DB_USER}:${process.env.DB_PW}@cluster0-7zngf.mongodb.net/test?retryWrites=true&w=majority`;
 
 mongoose.connect(dbURL, {useNewUrlParser: true})
     .catch(err => {
